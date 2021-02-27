@@ -1,0 +1,15 @@
+{
+    "name": "covid-vaccine-availability",
+    "version": "1.0.0",
+    "description": "Get Walgreens Covid Vaccine Appointment Availability",
+    "author": "Benjamin Homan<ben@benhoman.com>",
+    "main": "walgreens.js",
+    "scripts": {
+        "run": "node walgreens.js"
+    },
+    "dependencies": {
+        "node-fetch": "latest",
+        "request": "latest",
+        "lets-get-meta": "latest"
+    }
+}
