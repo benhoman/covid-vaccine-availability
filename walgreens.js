@@ -1,9 +1,36 @@
 const fetch = require('node-fetch');
 const request = require('request');
 const getMeta = require('lets-get-meta');
-const mainUrl = "https://www.walgreens.com/findcare/vaccination/covid-19/location-screening";
-const availabilityUrl = "https://www.walgreens.com/hcschedulersvc/svc/v1/immunizationLocations/availability";
+const buildOptions = require('minimist-options');
+const minimist = require('minimist');
+const dateFormat = require('dateformat');
 
+const options = buildOptions({
+    latitude: {
+        type: 'number',
+        default: 41.0985461
+    },
+    longitude: {
+        type: 'number',
+        default: -74.3939339
+    },
+    radius: {
+        type: 'number',
+        default: 25
+    }
+});
+const args = minimist(process.argv.slice(2), options);
+
+
+let startDate = dateFormat(new Date(), "yyyy-mm-dd");
+let mainUrl = "https://www.walgreens.com/findcare/vaccination/covid-19/location-screening";
+let availabilityUrl = "https://www.walgreens.com/hcschedulersvc/svc/v1/immunizationLocations/availability";
+let requestBody = {
+    serviceId: "99",
+    position: { latitude: args.latitude, longitude: args.longitude },
+    appointmentAvailability: { startDateTime: startDate },
+    radius: args.radius
+};
 
 fetch(mainUrl)
     .then(res => res.text())
@@ -19,7 +46,7 @@ fetch(mainUrl)
         },
         "referrer": "https://www.walgreens.com/findcare/vaccination/covid-19/location-screening",
         "referrerPolicy": "strict-origin-when-cross-origin",
-        "body": "{\"serviceId\":\"99\",\"position\":{\"latitude\":41.0985461,\"longitude\":-74.3939339},\"appointmentAvailability\":{\"startDateTime\":\"2021-02-28\"},\"radius\":25}",
+        "body": JSON.stringify(requestBody),
         "method": "POST",
         "mode": "cors"
     })

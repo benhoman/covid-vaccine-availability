@@ -8,8 +8,11 @@
         "run": "node walgreens.js"
     },
     "dependencies": {
+        "lets-get-meta": "latest",
+        "dateformat": "latest",
         "node-fetch": "latest",
         "request": "latest",
-        "lets-get-meta": "latest"
+        "minimist": "latest",
+        "minimist-options": "latest"
     }
 }
