@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-const request = require('request');
 const getMeta = require('lets-get-meta');
 const buildOptions = require('minimist-options');
 const minimist = require('minimist');
