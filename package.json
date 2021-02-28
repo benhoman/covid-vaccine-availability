@@ -11,7 +11,6 @@
         "lets-get-meta": "latest",
         "dateformat": "latest",
         "node-fetch": "latest",
-        "request": "latest",
         "minimist": "latest",
         "minimist-options": "latest"
     }
